@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-3">Tuis</h1>
+            <p class="lead">Hierdie is die tuisblad</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Gemeentes</h1>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for gemeente in context.gemeentes %}
+                <li class="list-group-item lead">
+                    <a href="{% url 'gemeente_view' gemeente.pk %}">{{ gemeente.naam }}</a> 
+                    <span class="badge badge-secondary float-right">{{ gemeente.preek_count }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

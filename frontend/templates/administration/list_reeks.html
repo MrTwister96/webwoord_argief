@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form action="" method="GET" class="my-2">
+            <div class="form-group">
+                <label for="inputSearch">Soek</label>
+                <input name="q" type="text" class="form-control" id="inputSearch" aria-describedby="searchHelp" placeholder="Soek">
+                <small id="searchHelp" class="form-text text-muted">Soek vir Reeks naam</small>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row justify-content-end mt-3">
+    <div class="col">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+        
+            <li class="page-item"><a class="page-link" href="#">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-md-11 col-sm-10">
+                        <h1 class="display-4">Reekse</h1>
+                    </div>
+                    <div class="col-md-1 col-sm-2 ">
+                        <a href="{% url 'new_reeks' %}" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
+                    </div>
+                </div>
+
+
+                
+            </div>
+
+            <table class="table lead">
+                <thead>
+                    <tr>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Preek Count</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reeks in object_list %}
+                    <tr>
+                        <td>{{ reeks.naam }}</td>
+                        <td><span class="badge badge-secondary">{{ reeks.preek_count }}</span></td>
+                        <td>
+                            <div class="dropdown">
+                                <span class="badge badge-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-card-list"></i>
+                                </span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'delete_reeks' reeks.pk %}">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-end mt-3">
+    <div class="col">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+        
+            <li class="page-item"><a class="page-link" href="#">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teken In | WebWoord</title>
+    {% load bootstrap4 %}
+
+    {% block css %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    {% endblock css %}
+
+    {% block javascript %}
+        {% bootstrap_javascript jquery='full' %}
+    {% endblock javascript %}
+
+    {% bootstrap_messages %}
+    {% load crispy_forms_tags %}
+</head>
+<body>
+
+    <div class="container" >
+        {% block content %}
+
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="display-4">Teken In</h1>
+                    </div>
+                    <form action="" method="post" class="m-5">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <input type="submit" value="Teken In" class="btn btn-primary float-right">
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        
+
+
+        {% endblock content %}
+    </div>
+
+    {% block modal %}
+    {% endblock modal %}
+    
+</body>
+</html>
+
+

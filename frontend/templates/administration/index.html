@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if context.notification %}
+<div class="toast m-3" style="position: absolute; top: 50; right: 0;" data-delay="5000">
+    <div class="toast-header">
+        <strong class="mr-auto">Notification</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body alert-success">
+        {{ context.notification }}
+    </div>
+</div>
+{% endif %}
+
+<script>
+    $(document).ready(function() {
+        $(".toast").toast('show');
+    });
+</script>
+
+<div class="row justify-content-center mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Gemeente Informasie <a href="" class="btn btn-secondary "><i class="bi bi-pencil"></i></a></h1>
+                
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">Naam:</div>
+                        <div class="col-md-6">{{ user.profile.gemeente.naam }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">Leraar:</div>
+                        <div class="col-md-6">{{ user.profile.gemeente.prediker }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">Adres:</div>
+                        <div class="col-md-6">{{ user.profile.gemeente.adres }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">Webwerf:</div>
+                        <div class="col-md-6"><a href="{{ user.profile.gemeente.webwerf }}" target="_blank">{{ user.profile.gemeente.webwerf }}</a></div>
+                    </div>
+                </li>
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">e-Pos:</div>
+                        <div class="col-md-6">{{ user.profile.gemeente.epos }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item lead">
+                    <div class="row">
+                        <div class="col-md-6">Telefoon:</div>
+                        <div class="col-md-6">{{ user.profile.gemeente.tel }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-3">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Administrasie</h1>
+            </div>
+
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item lead">
+                    <div class="row align-items-center">
+                        <div class="col-md-10 col-sm-8">
+                            <h1 class="lead">Preke <span class="badge badge-secondary">{{ context.preke.count }}</span></h1>
+                        </div>
+                        <div class="col-md-1 col-sm-2 ">
+                            <a href="{% url 'new_preek' %}" class="btn btn-success btn-sm"><i class="bi bi-plus-circle"></i></a>
+                        </div>
+                        <div class="col-md-1 col-sm-2">
+                            <a href="{% url 'list_preek' %}" class="btn btn-primary btn-sm"><i class="bi bi-arrows-angle-expand"></i></a> 
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item lead">
+                    <div class="row align-items-center">
+                        <div class="col-md-10 col-sm-8">
+                            <h1 class="lead">Reekse <span class="badge badge-secondary">{{ context.reekse.count }}</span></h1>
+                        </div>
+                        <div class="col-md-1 col-sm-2 ">
+                            <a href="{% url 'new_reeks' %}" class="btn btn-success btn-sm"><i class="bi bi-plus-circle"></i></a>
+                        </div>
+                        <div class="col-md-1 col-sm-2">
+                            <a href="{% url 'list_reeks' %}" class="btn btn-primary btn-sm"><i class="bi bi-arrows-angle-expand"></i></a> 
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item lead">
+                    <div class="row align-items-center">
+                        <div class="col-md-10 col-sm-8">
+                            <h1 class="lead">Predikers <span class="badge badge-secondary">{{ context.predikers.count }}</span></h1>
+                        </div>
+                        <div class="col-md-1 col-sm-2 ">
+                            <a href="{% url 'new_prediker' %}" class="btn btn-success btn-sm"><i class="bi bi-plus-circle"></i></a>
+                        </div>
+                        <div class="col-md-1 col-sm-2">
+                            <a href="{% url 'list_prediker' %}" class="btn btn-primary btn-sm"><i class="bi bi-arrows-angle-expand"></i></a> 
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

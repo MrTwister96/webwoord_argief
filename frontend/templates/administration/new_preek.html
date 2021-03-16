@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if context.error %}
+<div class="toast m-3" style="position: absolute; top: 50; right: 0;" data-delay="5000">
+    <div class="toast-header">
+        <strong class="mr-auto">Notification</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body alert-danger">
+        {{ context.error.message }}
+    </div>
+</div>
+{% endif %}
+
+<script>
+    $(document).ready(function() {
+        $(".toast").toast('show');
+    });
+</script>
+
+<div class="row justify-content-center mt-3">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Nuwe Preek</h1>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data" class="my-2">
+                {% csrf_token %}
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-10">
+                        {{ context.dateform.media }} 
+                        <div class="form-group">
+                            {{ context.dateform.datum|as_crispy_field }}
+                        </div> 
+                    </div>
+                </div>
+
+                
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputReeks">Reeks</label>
+                            <select name="reeks" id="inputReeks" class="form-control">
+                                <option>---------</option>
+                                {% for reeks in context.reekse %}
+                                <option value="{{ reeks.id }}">{{ reeks.naam }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            {{ context.dateform.prediker|as_crispy_field  }}
+                        </div> 
+                    </div>
+                </div>
+
+
+                <!-- <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputPrediker">Prediker</label>
+                            <select name="prediker" id="inputPrediker" class="form-control">
+                                <option>-----</option>
+                                {% for prediker in context.predikers %}
+                                <option value="{{ prediker.id }}">{{ prediker.van }}, {{ prediker.naam }} ({{ prediker.titel }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            {{ context.dateform.tema|as_crispy_field  }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputTema">Tema</label>
+                            <input name="tema" type="text" class="form-control" id="inputTema">
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            {{ context.dateform.skriflesing|as_crispy_field  }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputSkriflesing">Skriflesing</label>
+                            <input name="skriflesing" type="text" class="form-control" id="inputSkriflesing">
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            {{ context.dateform.audio_file|as_crispy_field  }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputFile">Preek MP3</label>
+                            <input name="file" type="file" accept=".mp3" class="form-control-file" id="inputFile">
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input name="file" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row justify-content-center">
+
+                    <div class="col-md-10">
+                        <input type="submit" value="Skep Preek" class="btn btn-primary float-right">
+                    </div>
+
+                </div>
+                
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

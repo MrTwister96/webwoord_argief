@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h1>Reekse</h1>
+            </div>
+
+            <ul class="list-group list-group-flush text-muted">
+                {% for reeks in context.reekse %}
+                <li class="list-group-item">
+                    <a href="">{{ reeks.naam }}</a> 
+                    <span class="badge badge-secondary float-right">{{ reeks.preek_count }}</span>
+                </li>
+                {% empty %}
+                <li class="list-group-item lead text-center">
+                    <p>Geen Reekse</p>
+                </li>
+                {% endfor %}
+            </ul>
+
+            
+            
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="" method="GET" class="my-2">
+                    <div class="form-group">
+                        <label for="inputSearch">Soek</label>
+                        <input name="q" type="text" class="form-control" id="inputSearch" aria-describedby="searchHelp" placeholder="Soek">
+                        <small id="searchHelp" class="form-text text-muted">Soek vir Tema, Skriflesing, Prediker Naam of Prediker Van</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% if context.preke.paginator.num_pages > 1 %}
+        <div class="row justify-content-end mt-3">
+            <div class="col">
+                <ul class="pagination">
+                    {% if context.preke.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                
+                    <li class="page-item"><a class="page-link" href="#">Page {{ context.preke.number }} of {{ context.preke.paginator.num_pages }}</a></li>
+                    
+                    {% if context.preke.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-header">
+                <h1>Preke ({{ context.gemeente.naam }})</h1>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Prediker</th>
+                            <th scope="col">Tema</th>
+                            <th scope="col">Skriflesisng</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for preek in context.preke.object_list %}
+                        <tr class="text-muted">
+                            <td>{{ preek.datum|date:"Y/m/d" }} {{ preek.datum|time:"G:i A" }}</td>
+                            <td>{{ preek.prediker.titel }} {{ preek.prediker.naam }} {{ preek.prediker.van }}</td>
+                            <td>{{ preek.tema }}</td>
+                            <td>{{ preek.skriflesing }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-card-list"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{ preek.audio_file.url }}" download="{{ preek.tema }}">Download</a>
+                                        <a class="dropdown-item" href="{{ preek.audio_file.url }}" target="_blank">Luister</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr class="lead text-center">
+                            <td colspan="5">Geen Preke</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            
+
+            
+        </div>
+        {% if context.preke.paginator.num_pages > 1 %}
+        <div class="row justify-content-end mt-3">
+            <div class="col">
+                <ul class="pagination">
+                    {% if context.preke.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                
+                    <li class="page-item"><a class="page-link" href="#">Page {{ context.preke.number }} of {{ context.preke.paginator.num_pages }}</a></li>
+                    
+                    {% if context.preke.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ context.preke.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock content %}
