@@ -1,4 +1,6 @@
-# webwoord_argief
+# Backend REST API for Covid Tracking App
+
+# Readme from another repo - NEED TO UPDATE
 
 
 ## Requirements

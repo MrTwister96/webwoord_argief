@@ -227,7 +227,7 @@ class DeletePreek(LoginRequiredMixin, View):
     def get(self, request, pk):
         preek_obj = Preek.objects.get(pk=pk)
         preek_obj.delete()
-        return HttpResponseRedirect('/administration')
+        return HttpResponseRedirect('/list_preek')
 
 DeletePreekView = DeletePreek.as_view()
 
