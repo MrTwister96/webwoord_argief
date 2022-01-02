@@ -11,25 +11,24 @@
     </div>
 </div>
 
-
 <div class="row">
 
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h1 class="display-4">Gemeentes</h1>
+                <a href="{% url 'argief' %}"><h1 class="display-4">Argief</h1></a> 
+
+                
             </div>
             <ul class="list-group list-group-flush">
-                {% for gemeente in context.gemeentes %}
                 <li class="list-group-item lead">
-                    <a href="{% url 'gemeente_view' gemeente.pk %}">{{ gemeente.naam }}</a> 
-                    <span class="badge badge-secondary float-right">{{ gemeente.preek_count }}</span>
+                    <p>EG Kerk Preek Argief</p>
                 </li>
-                {% endfor %}
             </ul>
         </div>
     </div>
 </div>
+
 
 
 {% endblock content %}

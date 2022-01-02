@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-3">EG Klank Argief</h1>
+            <p class="lead">EG Klank Preek Argief</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Gemeentes</h1>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for gemeente in context.gemeentes %}
+                <li class="list-group-item lead">
+                    <a href="{% url 'gemeente_view' gemeente.pk %}">{{ gemeente.naam }}</a> 
+                    <span class="badge badge-secondary float-right">{{ gemeente.preek_count }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Predikers</h1>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for prediker in context.predikers %}
+                <li class="list-group-item lead">
+                    <a href="#">{{ prediker }}</a> 
+                    <span class="badge badge-secondary float-right">{{ prediker.preek_count }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from frontend.views import HomeView, NewPreekView, AdministrationView, NewReeksView, NewPredikerView, DeletePreekView, DeleteReeksView, ListPreekView, ListReeksView, ListPredikerView, GemeenteView
+from frontend.views import HomeView, ArgiefView, NewPreekView, AdministrationView, NewReeksView, NewPredikerView, DeletePreekView, DeleteReeksView, ListPreekView, ListReeksView, ListPredikerView, GemeenteView
 
 urlpatterns = [
     # User Views
-    path('', HomeView, name='home'),
+    path('', HomeView.as_view(), name='home'),
+    path('argief/', ArgiefView.as_view(), name='argief'),
     path('gemeente/<pk>/', GemeenteView.as_view(), name='gemeente_view'),
 
 

@@ -16,18 +16,24 @@ from frontend.forms import PreekForm, ReeksForm, PredikerForm
 from datetime import datetime
 
 # General Views
-class Home(View):
+class HomeView(View):
     template_name = 'home.html'
+
+    def get(self, request):
+
+        return render(request, self.template_name)
+
+class ArgiefView(View):
+    template_name = 'argief.html'
 
     def get(self, request):
 
         context = {
             'gemeentes': Gemeente.objects.all(),
+            'predikers': Prediker.objects.all()
         }
 
         return render(request, self.template_name, {'context': context})
-
-HomeView = Home.as_view()
 
 class GemeenteView(View):
     template_name = 'general/gemeente_view.html'
